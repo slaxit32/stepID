@@ -13,22 +13,19 @@ def countFive(list,no):
 
 	cou=0
 	listFive=[]
-	cou2=0
-
+	#cou2=0
+	
 	for i in xrange(min(list),max(list),no):
 		for j in range(i,i+no):
 			#print(j,cou)
-			listFive.append([])
-			listFive[cou2].append(j)
-			listFive[cou2].append(cou)
+			#
+			listFive.append(j)
+			listFive.append(cou)
 
-			cou2+=1
+			#cou2+=1
 		cou+=1
 
 	return (listFive)
-
-
-
 
 def timeF():
 
@@ -44,6 +41,35 @@ def timeF():
 
 	return(lis2)
 
-print(countFive(timeF(), 5))
 
 
+listTime=timeF()
+listTimeSplitDecide=(countFive(listTime,5))
+
+
+
+
+############################# adding time range to example data
+def timeRange(val):
+
+	indexTimeVal=listTimeSplitDecide.index(val)+1
+	return(listTimeSplitDecide[indexTimeVal])
+
+lstTimeRange=[]
+for i in range (len(exampleData)):
+	tmp1=listTime[i]
+	#print(timeRange(tmp1))
+	lstTimeRange.append(timeRange(tmp1))
+
+##################################### adding time range to example data end
+
+
+outputFile = open('output.csv', 'wb')
+outputWriter = csv.writer(outputFile)
+
+
+for i in range (len(exampleData)):
+	outputWriter.writerow([exampleData[i][0], exampleData[i][1],exampleData[i][2], exampleData[i][3],listTime[i],lstTimeRange[i]])
+
+
+#------write the time to file end -------------------------
