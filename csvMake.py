@@ -42,6 +42,31 @@ def timeF():
 	return(lis2)
 
 
+def interp(li):
+
+	a=li
+
+	t=float(a[-1]-a[0])/len(a)
+
+	b=[]
+	b.append(a[0])
+	for i in range (len(a)):
+		b.append(int(round(b[i]+t)))
+
+	return b
+
+
+
+def timeWrite():
+	lis=[]
+	for i in range (len(exampleData)):
+		#lis.append(int(int(exampleData[i][0])/1000))
+
+		print(datetime.datetime.fromtimestamp(int(exampleData[i][0])/1000).strftime('%Y-%m-%d %H:%M:%S'))
+	return(lis)
+
+
+
 
 listTime=timeF()
 listTimeSplitDecide=(countFive(listTime,5))
