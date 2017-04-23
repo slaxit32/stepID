@@ -88,21 +88,24 @@ def getCollumn(c):
 		cc.append((exampleData[i][c]))
 	return cc
 
+def addingTimeRanges():
+	############################# adding time range to example data
+	lstTimeRange=[]
+	for i in range (len(exampleData)):
+		tmp1=listTime[i]
+		#print(timeRange(tmp1))
+		lstTimeRange.append(timeRange(tmp1))
+
+	return lstTimeRange
+##################################### adding time range to example data end
+
 	
 
 listTime=timeF()
 listTimeSplitDecide=(countFive(listTime,5))
 timeWriteOut=timeWrite()
 interPol=interp()
-
-############################# adding time range to example data
-lstTimeRange=[]
-for i in range (len(exampleData)):
-	tmp1=listTime[i]
-	#print(timeRange(tmp1))
-	lstTimeRange.append(timeRange(tmp1))
-##################################### adding time range to example data end
-
+timeRange=addingTimeRanges()
 
 xNorm=normalize(list(map(float, getCollumn(1))))
 yNorm=normalize(list(map(float, getCollumn(2))))
@@ -125,7 +128,7 @@ with open(outputFileName, 'w', newline='') as outfile:
 		exampleData[i][2],
 		exampleData[i][3],
 		listTime[i],
-		lstTimeRange[i],
+		timeRange[i],
 		timeWriteOut[i],
 		interPol[i],
 		xNorm[i],
