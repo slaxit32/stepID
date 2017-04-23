@@ -1,10 +1,10 @@
-import csv
+import csv,sys
 import numpy
 import heapq
 
-from prettytable import PrettyTable
+fileName=str(sys.argv[1])
 
-exampleFile = open('laka1_v2.csv')
+exampleFile = open(fileName)
 exampleReader = csv.reader(exampleFile)
 exampleData = list(exampleReader)
 
@@ -280,7 +280,7 @@ standerdDeviation=std()
 average=ave()
 averageAbsoluteDiff=aad()
 averageResultantAcce=ara()
-
+timeBetweenPeaks=tbp(30)
 
 name=[]
 stdX=[]
@@ -295,11 +295,13 @@ aadX=[]
 aadY=[]
 aadZ=[]
 
+tbpX=[]
+tbpY=[]
+tbpZ=[]
 
-print(averageResultantAcce)
 
 for i in range(len(standerdDeviation)):
-	name.append("p1")
+	name.append(str(sys.argv[1])[:-4])
 
 	stdX.append(standerdDeviation[i][0])
 	stdY.append(standerdDeviation[i][1])
@@ -313,25 +315,42 @@ for i in range(len(standerdDeviation)):
 	aadY.append(averageAbsoluteDiff[i][1])
 	aadZ.append(averageAbsoluteDiff[i][2])
 
-
-print("\n\n")
-
-
-x = PrettyTable()
-
-# x.add_column("stdX", stdX)
-# x.add_column("stdY", stdY)
-# x.add_column("stdZ", stdZ)
-
-# x.add_column("AverageX", aveY)
-# x.add_column("AverageY", aveY)
-# x.add_column("AverageZ", aveZ)
+	tbpX.append(timeBetweenPeaks[i][0])
+	tbpY.append(timeBetweenPeaks[i][1])
+	tbpZ.append(timeBetweenPeaks[i][2])
 
 
-x.add_column("aadX", aadX)
-x.add_column("aadY", aadY)
-x.add_column("aadZ", aadZ)
 
-x.add_column("ara", averageResultantAcce)
+outputFileName=outputFileName=str(sys.argv[1])[:-4]+"_v3.csv"
 
-print(x)
+
+with open(outputFileName, 'w', newline='') as outfile:
+	outputWriter = csv.writer(outfile)
+
+	for i in range (len(stdX)):
+		strTem=[
+
+		name[i],
+
+		stdX[i],
+		stdY[i],
+		stdZ[i],
+
+		aveX[i],
+		aveY[i],
+		aveZ[i],
+
+		aadX[i],
+		aadY[i],
+		aadZ[i],
+
+		tbpX[i],
+		tbpY[i],
+		tbpZ[i],
+
+		averageResultantAcce[i]
+
+		]
+
+
+		outputWriter.writerow(strTem)

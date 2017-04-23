@@ -119,8 +119,8 @@ outputFileName=str(sys.argv[1])[:-4]+"_v2.csv"
 with open(outputFileName, 'w', newline='') as outfile:
 	outputWriter = csv.writer(outfile)
 
-	t="timeStamp","x","y","z","second","timeGroup","dateTime","timeInter","xNorm","yNorm","zNorm"
-	outputWriter.writerow(t)
+	# t="timeStamp","x","y","z","second","timeGroup","dateTime","timeInter","xNorm","yNorm","zNorm"
+	# outputWriter.writerow(t)
 
 	for i in range (len(exampleData)):
 		strTem=[exampleData[i][0],
