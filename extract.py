@@ -2,9 +2,9 @@ import csv
 import numpy
 import heapq
 
+from prettytable import PrettyTable
 
-
-exampleFile = open('output.csv')
+exampleFile = open('laka1_v2.csv')
 exampleReader = csv.reader(exampleFile)
 exampleData = list(exampleReader)
 
@@ -20,6 +20,16 @@ def all_indices(value, qlist):
     #print(indices)
     return indices
 
+def percentageFromUp(li,per):
+	li.sort()
+	starIn=int(len(li)*(100-per)/100)
+	return(li[starIn::])
+
+def listAverage(li):
+	k=sum(li) / float(len(li))
+	return k
+
+#Standard Deviation
 def std():
 	x=[]
 	y=[]
@@ -61,6 +71,7 @@ def std():
 		rem.append(re)
 	return rem
 
+#Average Absolute Difference
 def aad():
 	x=[]
 	y=[]
@@ -103,6 +114,7 @@ def aad():
 		rem.append(re)
 	return rem
 
+#Average
 def ave():
 	x=[]
 	y=[]
@@ -145,7 +157,8 @@ def ave():
 		rem.append(re)
 	return rem
 
-def arv():
+#Average Resultant Acceleration
+def ara():
 	x=[]
 	y=[]
 	z=[]
@@ -185,15 +198,7 @@ def arv():
 		rem.append(numpy.average(re))
 	return rem
 
-def percentageFromUp(li,per):
-	li.sort()
-	starIn=int(len(li)*(100-per)/100)
-	return(li[starIn::])
-
-def listAverage(li):
-	k=sum(li) / float(len(li))
-	return k
-
+#Time Between Peaks
 def tbp(per):
 	x=[]
 	y=[]
@@ -268,4 +273,65 @@ def tbp(per):
 	return rem
 
 
-print(tbp(60))
+#std_x std_y std z
+arr=[]
+
+standerdDeviation=std()
+average=ave()
+averageAbsoluteDiff=aad()
+averageResultantAcce=ara()
+
+
+name=[]
+stdX=[]
+stdY=[]
+stdZ=[]
+
+aveX=[]
+aveY=[]
+aveZ=[]
+
+aadX=[]
+aadY=[]
+aadZ=[]
+
+
+print(averageResultantAcce)
+
+for i in range(len(standerdDeviation)):
+	name.append("p1")
+
+	stdX.append(standerdDeviation[i][0])
+	stdY.append(standerdDeviation[i][1])
+	stdZ.append(standerdDeviation[i][2])
+
+	aveX.append(average[i][0])
+	aveY.append(average[i][1])
+	aveZ.append(average[i][2])
+
+	aadX.append(averageAbsoluteDiff[i][0])
+	aadY.append(averageAbsoluteDiff[i][1])
+	aadZ.append(averageAbsoluteDiff[i][2])
+
+
+print("\n\n")
+
+
+x = PrettyTable()
+
+# x.add_column("stdX", stdX)
+# x.add_column("stdY", stdY)
+# x.add_column("stdZ", stdZ)
+
+# x.add_column("AverageX", aveY)
+# x.add_column("AverageY", aveY)
+# x.add_column("AverageZ", aveZ)
+
+
+x.add_column("aadX", aadX)
+x.add_column("aadY", aadY)
+x.add_column("aadZ", aadZ)
+
+x.add_column("ara", averageResultantAcce)
+
+print(x)
