@@ -89,7 +89,7 @@ def getCollumn(c):
 	return cc
 
 def addingTimeRanges():
-	############################# adding time range to example data
+
 	lstTimeRange=[]
 	for i in range (len(exampleData)):
 		tmp1=listTime[i]
@@ -97,7 +97,7 @@ def addingTimeRanges():
 		lstTimeRange.append(timeRange(tmp1))
 
 	return lstTimeRange
-##################################### adding time range to example data end
+
 
 	
 

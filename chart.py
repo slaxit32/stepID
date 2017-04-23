@@ -5,7 +5,7 @@ import plotly.graph_objs as go
 import pandas as pd
 
 
-df = pd.read_csv("C:/Users/slax/Desktop/t1.csv")
+df = pd.read_csv("t1.csv")
 
 x1=df.timeS
 y1=df.x
