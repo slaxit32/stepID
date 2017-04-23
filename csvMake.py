@@ -1,8 +1,11 @@
 import csv
 import datetime
-import mumpy
+import numpy
+import sys
 
-exampleFile = open('t1.csv')
+#print ('Argument List:', str(sys.argv[1]))
+
+exampleFile = open(str(sys.argv[1]))
 exampleReader = csv.reader(exampleFile)
 exampleData = list(exampleReader)
 
@@ -17,7 +20,7 @@ def countFive(list,no):
 	listFive=[]
 	#cou2=0
 	
-	for i in xrange(min(list),max(list),no):
+	for i in range(min(list),max(list),no):
 		for j in range(i,i+no):
 			#print(j,cou)
 			#
@@ -57,7 +60,7 @@ def interp():
 	le=len(a)
 	
 	fact=float(rang)/le
-	print(fact)
+	#print(fact)
 
 	b=[]
 	b.append(a[0])
@@ -79,6 +82,11 @@ def timeRange(val):
 	indexTimeVal=listTimeSplitDecide.index(val)+1
 	return(listTimeSplitDecide[indexTimeVal])
 
+def getCollumn(c):
+	cc=[]
+	for i in range(len(exampleData)):
+		cc.append((exampleData[i][c]))
+	return cc
 
 	
 
@@ -86,27 +94,46 @@ listTime=timeF()
 listTimeSplitDecide=(countFive(listTime,5))
 timeWriteOut=timeWrite()
 interPol=interp()
-std()
-
 
 ############################# adding time range to example data
-
-
 lstTimeRange=[]
 for i in range (len(exampleData)):
 	tmp1=listTime[i]
 	#print(timeRange(tmp1))
 	lstTimeRange.append(timeRange(tmp1))
-
 ##################################### adding time range to example data end
 
 
-outputFile = open('output.csv', 'wb')
-outputWriter = csv.writer(outputFile)
+xNorm=normalize(list(map(float, getCollumn(1))))
+yNorm=normalize(list(map(float, getCollumn(2))))
+zNorm=normalize(list(map(float, getCollumn(3))))
 
 
-for i in range (len(exampleData)):
-	outputWriter.writerow([exampleData[i][0], exampleData[i][1],exampleData[i][2], exampleData[i][3],listTime[i],lstTimeRange[i],timeWriteOut[i],interPol[i]])
+outputFileName=str(sys.argv[1])[:-4]+"_v2.csv"
+
+
+#outputFile = open('output.csv', 'w')
+with open(outputFileName, 'w', newline='') as outfile:
+	outputWriter = csv.writer(outfile)
+
+	t="timeStamp","x","y","z","second","timeGroup","dateTime","timeInter","xNorm","yNorm","zNorm"
+	outputWriter.writerow(t)
+
+	for i in range (len(exampleData)):
+		strTem=[exampleData[i][0],
+		exampleData[i][1],
+		exampleData[i][2],
+		exampleData[i][3],
+		listTime[i],
+		lstTimeRange[i],
+		timeWriteOut[i],
+		interPol[i],
+		xNorm[i],
+		yNorm[i],
+		zNorm[i]]
+
+
+		outputWriter.writerow(strTem)
 
 
 #------write the time to file end -------------------------
