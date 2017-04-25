@@ -19,9 +19,9 @@ def countFive(list,no):
 	cou=0
 	listFive=[]
 	#cou2=0
-	print(min(list),max(list),no)
+	#print(min(list),max(list),no)
 	for i in range(min(list),max(list)+1,no):
-		print("i",i)
+		#print("i",i)
 		for j in range(i,i+no):
 			#print(j,cou)
 			#
@@ -105,9 +105,9 @@ def addingTimeRanges():
 	
 
 listTime=timeF()
-print(listTime)
+#print(listTime)
 listTimeSplitDecide=(countFive(listTime,5))
-print(listTimeSplitDecide)
+#print(listTimeSplitDecide)
 timeWriteOut=timeWrite()
 interPol=interp()
 timeRange=addingTimeRanges()
